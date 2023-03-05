@@ -90,10 +90,20 @@ resource "azurerm_api_management_api_policy" "linkedin-api" {
 
   xml_content = <<XML
 <policies>
-  <inbound>
-    <base/>
-    <set-backend-service backend-id="linkedin-profile-backend" />
-  </inbound>
+    <inbound>
+        <base />
+        <set-backend-service backend-id="linkedin-profile-backend" />
+        <rate-limit-by-key calls="1" renewal-period="60" counter-key="@(context.Subscription?.Key ?? "anonymous")" />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
 </policies>
 XML
 }
