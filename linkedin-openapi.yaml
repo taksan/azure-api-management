@@ -12,3 +12,18 @@ paths:
       responses:
         '200':
           description: OK
+  /getprofile:
+    get:
+      description: "get profile"
+      operationId: getprofile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                example:
+                  linkedInProfile:
+                    username: user1
+                    email: user1@foo.com
+

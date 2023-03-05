@@ -29,8 +29,33 @@ resource "azurerm_api_management_api" "linkedin-api" {
 
   import {
     content_format = "openapi"
-    content_value  = file("${path.module}/linkedin-api.yaml")
+    content_value  = file("${path.module}/linkedin-openapi.yaml")
   }
+}
+
+resource "azurerm_api_management_api_operation_policy" "getprofile_policy" {
+  api_name            = azurerm_api_management_api.linkedin-api.name
+  api_management_name = azurerm_api_management.api4fun.name
+  resource_group_name = azurerm_resource_group.rg.name
+  operation_id        = "getprofile"
+
+  xml_content = <<XML
+<policies>
+    <inbound>
+        <base />
+        <mock-response status-code="200" content-type="application/json" />
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
+XML
 }
 
 resource "azurerm_api_management_api_policy" "linkedin-api" {
