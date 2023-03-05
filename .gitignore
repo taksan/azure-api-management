@@ -1,0 +1,6 @@
+dev.tfvars
+.vscode
+.idea
+.terraform
+.*.swp
+creds.sh

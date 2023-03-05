@@ -1,0 +1,14 @@
+openapi: '3.0.2'
+info:
+  title: Sample Function API
+  version: '1.0'
+
+
+paths:
+  /createprofile:
+    put:
+      description: "create profile"
+      operationId: createprofile
+      responses:
+        '200':
+          description: OK
