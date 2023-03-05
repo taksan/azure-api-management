@@ -26,4 +26,18 @@ paths:
                   linkedInProfile:
                     username: user1
                     email: user1@foo.com
+  /getname:
+    get:
+      description: "get name"
+      operationId: getname
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                example:
+                  linkedInProfile:
+                    first_name: john
+                    last_name: doe
 
