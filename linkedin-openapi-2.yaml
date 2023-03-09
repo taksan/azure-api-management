@@ -3,6 +3,7 @@ info:
   title: Linkedin API
   version: '1.0'
 
+
 paths:
   /createprofile:
     put:
@@ -37,6 +38,6 @@ paths:
               schema:
                 example:
                   linkedInProfile:
-                    first_name: john
-                    last_name: doe
+                    first_name: jane
+                    last_name: fonda
 
