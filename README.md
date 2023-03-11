@@ -9,3 +9,8 @@ Implements a basic apim to a http trigger function app  with some fake Linkedin 
     - Products:
       - Basic:
         - linkedin api
+
+
+## Authentication management docs
+
+https://learn.microsoft.com/en-us/azure/api-management/authentication-managed-identity-policy        
