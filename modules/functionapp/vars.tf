@@ -19,3 +19,12 @@ variable "account_replication_type" {
     type = string
     default = "LRS"
 }
+
+variable "auth_settings" {
+  type = object({
+    tenant_id     = string
+    client_id     = string
+    client_secret = string
+  })
+  default = null
+}

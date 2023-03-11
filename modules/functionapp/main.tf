@@ -19,9 +19,9 @@ resource "azurerm_linux_function_app" "a-function" {
 
   app_settings = {
     FUNCTIONS_WORKER_RUNTIME = var.runtime,
-    //AzureWebJobsStorage = azurerm_storage_account.function_sa.primary_connection_string
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.insights.instrumentation_key,
     WEBSITE_MOUNT_ENABLED = 1
+    MICROSOFT_PROVIDER_AUTHENTICATION_SECRET = var.auth_settings != null? var.auth_settings.client_secret: null
   }
 
   lifecycle {
@@ -30,6 +30,21 @@ resource "azurerm_linux_function_app" "a-function" {
       app_settings["APPINSIGHTS_INSTRUMENTATIONKEY"],
       app_settings["WEBSITE_RUN_FROM_PACKAGE"]
     ]
+  }
+
+  dynamic "auth_settings" {
+    for_each = var.auth_settings != null? [var.auth_settings] : []
+    content {
+      enabled = true
+      default_provider = "AzureActiveDirectory"
+      issuer = "https://sts.windows.net/${auth_settings.value.tenant_id}/v2.0"
+      token_store_enabled = true
+
+      active_directory {
+        client_id = auth_settings.value.client_id
+        client_secret = auth_settings.value.client_secret
+      }
+    }
   }
 }
 

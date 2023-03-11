@@ -40,6 +40,7 @@ resource "azurerm_api_management_api_policy" "linkedin-api-base-policy-v1" {
 
   xml_content = templatefile("function-policy-backend.tpl.xml", {
     backend-id = azurerm_api_management_backend.linkedin-profile-backend.name
+    managed-identity = azuread_application.linkedin_app.application_id
   })
 }
 
@@ -48,15 +49,6 @@ resource "azurerm_api_management_api_operation_policy" "getprofile-v1-policy" {
   api_management_name = azurerm_api_management.api4fun.name
   resource_group_name = azurerm_resource_group.rg.name
   operation_id        = "getprofile"
-
-  xml_content = local.mock_policy
-}
-
-resource "azurerm_api_management_api_operation_policy" "getname-v1-policy" {
-  api_name            = azurerm_api_management_api.linkedin-api-v1.name
-  api_management_name = azurerm_api_management.api4fun.name
-  resource_group_name = azurerm_resource_group.rg.name
-  operation_id        = "getname"
 
   xml_content = local.mock_policy
 }
@@ -91,16 +83,8 @@ resource "azurerm_api_management_api_policy" "linkedin-api-base-policy-v2" {
 
   xml_content = templatefile("function-policy-backend.tpl.xml", {
     backend-id = azurerm_api_management_backend.linkedin-profile-backend.name
+    managed-identity = azuread_application.linkedin_app.application_id
   })
-}
-
-resource "azurerm_api_management_api_operation_policy" "getname-policy-v2" {
-  api_name            = azurerm_api_management_api.linkedin-api-v2.name
-  api_management_name = azurerm_api_management.api4fun.name
-  resource_group_name = azurerm_resource_group.rg.name
-  operation_id        = "getname"
-
-  xml_content = local.mock_policy
 }
 
 resource "azurerm_api_management_api_operation_policy" "getprofile-policy-v2" {

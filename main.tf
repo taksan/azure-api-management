@@ -4,3 +4,4 @@ resource "azurerm_resource_group" "rg" {
 }
 
 data "azurerm_client_config" "current" {}
+data "azuread_client_config" "current" {}
