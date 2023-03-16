@@ -15,3 +15,15 @@ output "user-ids" {
     for k, v in random_pet.user : k => v.id
   }
 }
+
+output "vm-ip" {
+  value = module.catalog_vm.public_ip
+}
+
+output "apim-private-ip" {
+  value = azurerm_api_management.api4fun.private_ip_addresses
+}
+
+output "api-url" {
+  value = azurerm_api_management.api4fun.gateway_url
+}

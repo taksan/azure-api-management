@@ -6,3 +6,4 @@ dev.tfvars
 creds.sh
 terraform.tfstate
 terraform.tfstate.backup
+*.pem
